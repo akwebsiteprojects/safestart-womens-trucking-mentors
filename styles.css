@@ -191,3 +191,13 @@ blockquote cite{display:block;margin-top:8px;font-size:13px;font-style:normal;fo
   .photo.portrait{aspect-ratio:4/3}
   .photo.portrait img{object-position:center 25%}
 }
+.form-status a{text-decoration:underline}
+.hero-photo img{object-position:62% center}
+.photo.tall.trucker img{object-position:center 30%}
+.story-photo.trucker img{object-position:center 28%}
+.photo.tall.miner img{object-position:48% center}
+.story-photo.founder img{object-position:center 22%}
+.story-photo.winter img{object-position:62% 45%}
+.photo.portrait.peace{aspect-ratio:1/1}
+.photo.portrait.peace img{object-position:40% bottom}
+@media(max-width:780px){.photo.portrait.peace{aspect-ratio:1/1}}

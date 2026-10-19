@@ -5,16 +5,17 @@
 // 1. Where contact form messages go.
 var CONTACT_EMAIL = 'sandraw0064@gmail.com';
 
-// 2. Optional form service. Leave empty and the form opens the visitor's email
-//    app with their message filled in. To have messages delivered straight to
-//    your inbox instead, create a free form at formspree.io and paste its URL
-//    here, for example 'https://formspree.io/f/abcdwxyz'.
-var FORM_ENDPOINT = '';
+// 2. Form delivery. Messages are sent through FormSubmit (formsubmit.co), a
+//    free service that forwards each submission to CONTACT_EMAIL. No account
+//    is needed. The very first submission sends an activation email to
+//    CONTACT_EMAIL; click the link in it once and the form is live.
+//    To use a different service, replace this with its address.
+var FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + CONTACT_EMAIL;
 
 // 3. YouTube videos for the Videos page. Add one line per video. The id is the
 //    part after "v=" in the YouTube link. While this list is empty the page
 //    shows the "Coming soon" cards.
-//    Example: { id: 'AbCdEfGhIjK', title: "Sandy's story", text: 'A short description.' }
+//    Example: { id: 'AbCdEfGhIjK', title: "Sandra's story", text: 'A short description.' }
 var VIDEOS = [];
 
 /* ====== No need to edit below this line ====== */
@@ -78,25 +79,38 @@ document.querySelectorAll('[data-contact-form]').forEach(function (form) {
     if (!ok) { say('Please add your name, a valid email and a message.', true); return; }
     if (f._gotcha.value) return; // spam trap
 
-    if (FORM_ENDPOINT) {
-      var btn = form.querySelector('button[type=submit]');
-      btn.disabled = true; say('Sending…');
-      fetch(FORM_ENDPOINT, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
-        .then(function (r) {
-          if (!r.ok) throw new Error();
-          form.reset(); say('Thank you. Your message has been sent and we will be in touch soon.');
-        })
-        .catch(function () { say('Sorry, that did not send. Please try again or email us directly.', true); })
-        .then(function () { btn.disabled = false; });
-    } else {
-      var body = 'Name: ' + f.name.value.trim() + '\nEmail: ' + f.email.value.trim() +
-        (f.phone.value.trim() ? '\nPhone: ' + f.phone.value.trim() : '') +
-        '\nInterested in: ' + f.interest.value + '\n\n' + f.message.value.trim();
-      window.location.href = 'mailto:' + CONTACT_EMAIL +
-        '?subject=' + encodeURIComponent('SafeStart enquiry from ' + f.name.value.trim()) +
-        '&body=' + encodeURIComponent(body);
-      say('Your email app should now open with your message ready. Press send there to finish.');
-    }
+    var btn = form.querySelector('button[type=submit]');
+    var data = {
+      name: f.name.value.trim(),
+      email: f.email.value.trim(),
+      phone: f.phone.value.trim() || 'Not given',
+      interested_in: f.interest.value,
+      message: f.message.value.trim(),
+      sent_from_page: f.page.value,
+      _subject: 'SafeStart enquiry from ' + f.name.value.trim(),
+      _replyto: f.email.value.trim(),
+      _template: 'table'
+    };
+    btn.disabled = true; say('Sending…');
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (!res.ok || String(res.j.success) !== 'true') throw new Error();
+        form.reset(); say('Thank you. Your message has been sent and we will be in touch soon.');
+      })
+      .catch(function () {
+        status.classList.add('error');
+        status.innerHTML = 'Sorry, that did not send. Please try again, or <a data-fallback href="#">email us instead</a>.';
+        status.querySelector('[data-fallback]').href = 'mailto:' + CONTACT_EMAIL +
+          '?subject=' + encodeURIComponent(data._subject) +
+          '&body=' + encodeURIComponent('Name: ' + data.name + '\nEmail: ' + data.email + '\nPhone: ' + data.phone +
+            '\nInterested in: ' + data.interested_in + '\n\n' + data.message);
+      })
+      .then(function () { btn.disabled = false; });
   });
 });
 
