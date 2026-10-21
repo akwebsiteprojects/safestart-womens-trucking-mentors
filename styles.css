@@ -201,3 +201,5 @@ blockquote cite{display:block;margin-top:8px;font-size:13px;font-style:normal;fo
 .photo.portrait.peace{aspect-ratio:1/1}
 .photo.portrait.peace img{object-position:40% bottom}
 @media(max-width:780px){.photo.portrait.peace{aspect-ratio:1/1}}
+.photo.aside-photo.cab{aspect-ratio:1/1}
+.photo.aside-photo.cab img{object-position:center 35%}

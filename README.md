@@ -35,6 +35,6 @@ Double-click `index.html`.
 - Confirm the public contact email. `sandraw0064@gmail.com` is used for the form and has not been confirmed as the business's public address.
 - Confirm the operating province and the exact services and scope. The site describes mentorship and career guidance, not certified driver training.
 - Phone number, website address and social media handles are not shown because only placeholder values were available. Add them once real ones exist.
-- Confirm you hold a licence for the five photos in `images/` (they look like stock photography).
+- Confirm you have permission to use every photo in `images/`, including from the people shown in them.
 - Confirm the person in the Home hero photo (`images/truck-hero.jpg`) is happy for it to be used on the site.
 - Add a short privacy notice: enquiries now pass through FormSubmit, a third-party service, on their way to the inbox.
