@@ -203,3 +203,12 @@ blockquote cite{display:block;margin-top:8px;font-size:13px;font-style:normal;fo
 @media(max-width:780px){.photo.portrait.peace{aspect-ratio:1/1}}
 .photo.aside-photo.cab{aspect-ratio:1/1}
 .photo.aside-photo.cab img{object-position:center 35%}
+
+/* Email card (replaces the contact form) */
+.email-card{text-align:center}
+.email-card p{margin:0 0 22px}
+.email-address{display:block;margin:0 0 22px;padding:16px 12px;border:1px dashed #b9d3cf;border-radius:10px;background:var(--tint);color:var(--t2);font-size:clamp(17px,2.4vw,22px);font-weight:800;letter-spacing:-.01em;overflow-wrap:anywhere}
+.email-address:hover{background:#dff2ed}
+.email-card .btn{display:block;width:100%;text-align:center}
+.copy-btn{margin-top:12px;background:none;border:0;color:var(--t);font:inherit;font-size:14px;font-weight:700;text-decoration:underline;cursor:pointer;padding:6px}
+.contact-plain .email-card{max-width:520px}
