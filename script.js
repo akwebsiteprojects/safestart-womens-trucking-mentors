@@ -89,9 +89,9 @@ if (tgrid) {
   }
 }
 
-// Contact form (one on every page). Sending opens the visitor's email app
-// with a message to the address in the form's data-email attribute,
-// already filled in with everything they typed.
+// Contact form (one on every page). Clicking Send shows buttons that open
+// Gmail, Outlook or the visitor's email app with a message to the address in
+// the form's data-email attribute, already filled in with everything they typed.
 document.querySelectorAll('[data-contact-form]').forEach(function (form) {
   var status = form.querySelector('.form-status');
   var to = form.getAttribute('data-email');
@@ -115,11 +115,30 @@ document.querySelectorAll('[data-contact-form]').forEach(function (form) {
       '\nInterested in: ' + f.interest.value +
       '\nSent from: ' + f.page.value + ' page' +
       '\n\n' + f.message.value.trim();
-    window.location.href = 'mailto:' + to +
-      '?subject=' + encodeURIComponent('SafeStart enquiry from ' + name) +
-      '&body=' + encodeURIComponent(body);
-    say('Your email app should now open with your message ready. Press send there to finish. ' +
-        'If nothing opened, email us at ' + to + '.');
+    var subject = 'SafeStart enquiry from ' + name;
+    var enc = encodeURIComponent;
+    var links = {
+      gmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=' + enc(to) + '&su=' + enc(subject) + '&body=' + enc(body),
+      outlook: 'https://outlook.live.com/mail/0/deeplink/compose?to=' + enc(to) + '&subject=' + enc(subject) + '&body=' + enc(body)
+    };
+    status.classList.remove('error');
+    status.innerHTML = '<strong>Almost done. Choose how to send your message:</strong>' +
+      '<span class="send-options">' +
+      '<a class="btn" data-opt="gmail" target="_blank" rel="noopener">Send with Gmail</a>' +
+      '<a class="btn outline" data-opt="outlook" target="_blank" rel="noopener">Send with Outlook</a>' +
+      '<a class="btn outline" data-opt="app">Use my email app</a>' +
+      '<button type="button" class="copy-btn" data-opt="copy">Copy my message instead</button>' +
+      '</span>' +
+      '<span class="send-help">Your message is filled in and ready. Just press Send. Or email us at <a href="mailto:' + to + '">' + to + '</a>.</span>';
+    status.querySelector('[data-opt="gmail"]').href = links.gmail;
+    status.querySelector('[data-opt="outlook"]').href = links.outlook;
+    status.querySelector('[data-opt="app"]').href = 'mailto:' + to + '?subject=' + enc(subject) + '&body=' + enc(body);
+    status.querySelector('[data-opt="copy"]').addEventListener('click', function () {
+      var btn = this, text = 'To: ' + to + '\nSubject: ' + subject + '\n\n' + body;
+      function ok() { btn.textContent = 'Copied. Paste it into an email to ' + to; }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, ok); else ok();
+    });
+    status.querySelector('[data-opt="gmail"]').focus();
   });
 });
 

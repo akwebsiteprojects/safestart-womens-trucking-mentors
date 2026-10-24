@@ -232,3 +232,11 @@ aside .email-address{text-align:center}
   .testimonial-grid,.testimonial-grid.single .testimonial{grid-template-columns:1fr;gap:20px}
   .testimonial-grid.single blockquote{font-size:20px}
 }
+.form-status .send-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 8px}
+.form-status .send-options .btn{width:100%;text-align:center;padding:12px 14px;font-size:15px}
+.form-status .send-options [data-opt="app"]{grid-column:1/-1}
+.form-status .send-options .copy-btn{grid-column:1/-1;margin:0}
+.form-status .send-help{display:block;font-weight:500;color:var(--m);font-size:13px}
+.form-status .send-help a{text-decoration:underline}
+@media(max-width:780px){.form-status .send-options{grid-template-columns:1fr}}
+.form-status .send-options a.btn{text-decoration:none}
