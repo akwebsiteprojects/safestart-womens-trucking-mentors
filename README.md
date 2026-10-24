@@ -31,6 +31,7 @@ Every page has the contact form. When a visitor clicks **Send message**, their o
 To change the receiving address, replace `safestartmentors@gmail.com` in all five `.html` files.
 
 ## Settings (top of `script.js`)
+- `TESTIMONIALS` — the success stories on the Home page. Upload a screenshot to `images/testimonials/`, then add an entry (image, quote, who) at the top of the list. Only post messages with the sender's permission, and crop out names, phone numbers and profile photos.
 - `VIDEOS` — add YouTube video ids here and the Videos page swaps the "Coming soon" cards for real players.
 
 ## Before publishing
