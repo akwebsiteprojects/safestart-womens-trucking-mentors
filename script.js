@@ -18,7 +18,7 @@ var TESTIMONIALS = [
   {
     image: 'images/testimonials/haul-truck-job.jpg',
     quote: 'I appreciate u for helping me find the new job I have. I had the idea of the haul truck but you actually made me confident to try it out.',
-    who: '27-year-old, now working as a haul truck operator'
+    who: '27-year-old haul truck operator, now earning $100K a year'
   }
 ];
 
