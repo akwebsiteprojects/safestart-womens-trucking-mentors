@@ -11,10 +11,10 @@ Static, responsive, multi-page website. No build step and no dependencies.
 | `videos.html` | Videos |
 | `contact.html` | Contact |
 | `styles.css` | Design for every page |
-| `script.js` | Menu, copy-email button, videos, scroll animation |
+| `script.js` | Menu, contact form, videos, scroll animation |
 | `images/` | The photos used across the pages |
 
-Every page has the contact email card. The seven files and the `images` folder must sit together in the same folder.
+Every page has the contact form. The seven files and the `images` folder must sit together in the same folder.
 
 ## Open locally
 Double-click `index.html`.
@@ -25,15 +25,17 @@ Double-click `index.html`.
 3. Under **Branch** choose `main` and `/ (root)`, then **Save**.
 4. After a minute or two the site is live at `https://akwebsiteprojects.github.io/safestart-womens-trucking-mentors/`.
 
-## Contact email
-Every page has an "Email SafeStart" card with the address `sandraw0064@gmail.com`, a "Send an email" button and a "Copy email address" button. To change the address, replace `sandraw0064@gmail.com` in all five `.html` files.
+## Contact form
+Every page has the contact form. When a visitor clicks **Send message**, their own email app opens with a new email to `safestartmentors@gmail.com`, already filled in with their name, email, phone, interest, the page they were on and their message. They press Send in their email app to finish. No form service or account is involved.
+
+To change the receiving address, replace `safestartmentors@gmail.com` in all five `.html` files.
 
 ## Settings (top of `script.js`)
 - `VIDEOS` — add YouTube video ids here and the Videos page swaps the "Coming soon" cards for real players.
 
 ## Before publishing
 - Confirm the founder's public name (currently Sandra Williams).
-- Confirm `sandraw0064@gmail.com` is the address you want shown publicly on every page.
+- Confirm `safestartmentors@gmail.com` is the address you want shown publicly on every page.
 - Confirm the operating province and the exact services and scope. The site describes mentorship and career guidance, not certified driver training.
 - Phone number, website address and social media handles are not shown because only placeholder values were available. Add them once real ones exist.
 - `images/og-image.jpg` is the picture shown when a link to the site is shared (Facebook, LinkedIn, WhatsApp, iMessage, X). To change it, replace that file with another 1200×630 JPG of the same name.

@@ -118,21 +118,37 @@
       <div class="contact-copy reveal">
         <span class="eyebrow light">Your next chapter</span>
         <h2>You don't have to be fearless.<br>You just have to begin.</h2>
-        <p>You don't need experience. You don't need confidence yet. You just need one step. Send an email and start a conversation about what's possible.</p>
+        <p>You don't need experience. You don't need confidence yet. You just need one step. Send a note and start a conversation about what's possible.</p>
         <ul class="ticks">
           <li>No pressure and no judgment</li>
           <li>Any question is welcome</li>
           <li>A reply from someone who has lived the journey</li>
         </ul>
       </div>
-      <div class="form email-card reveal">
-        <h2 class="form-title">Email SafeStart</h2>
-        <p>Tell us a little about yourself and what you're hoping to explore. Every email gets a personal reply.</p>
-        <a class="email-address" href="mailto:sandraw0064@gmail.com?subject=SafeStart%20enquiry">sandraw0064@gmail.com</a>
-        <a class="btn" href="mailto:sandraw0064@gmail.com?subject=SafeStart%20enquiry">Send an email →</a>
-        <button class="copy-btn" type="button" data-copy="sandraw0064@gmail.com">Copy email address</button>
+      <form class="form reveal" data-contact-form data-email="safestartmentors@gmail.com" novalidate>
+        <h2 class="form-title">Send SafeStart a message</h2>
+        <div class="row">
+          <label>Your name<input type="text" name="name" autocomplete="name" required></label>
+          <label>Email<input type="email" name="email" autocomplete="email" required></label>
+        </div>
+        <div class="row">
+          <label>Phone <span class="opt">(optional)</span><input type="tel" name="phone" autocomplete="tel"></label>
+          <label>I'm interested in
+            <select name="interest">
+              <option>Exploring a trucking career</option>
+              <option>Class 1 / AZ licensing questions</option>
+              <option>Heavy equipment operation</option>
+              <option>Mentorship and confidence</option>
+              <option>Something else</option>
+            </select>
+          </label>
+        </div>
+        <label>Your message<textarea name="message" rows="5" required placeholder="Tell us a little about yourself and what you're hoping to explore."></textarea></label>
+        <input type="hidden" name="page" value="Home">
+        <button class="btn" type="submit">Send message →</button>
         <p class="form-status" role="status" aria-live="polite"></p>
-      </div>
+        <p class="form-note">Clicking send opens your email app with your message ready to go to <a href="mailto:safestartmentors@gmail.com">safestartmentors@gmail.com</a>.</p>
+      </form>
     </div>
   </section>
 </main>
@@ -141,6 +157,7 @@
     <div>
       <strong class="foot-brand">SafeStart Women's Trucking Mentors</strong>
       <p>Start Safe. Stay Strong. Drive Forward.</p>
+      <p class="foot-email">Email: <a href="mailto:safestartmentors@gmail.com">safestartmentors@gmail.com</a></p>
     </div>
     <nav class="foot-links" aria-label="Footer">
       <a href="index.html">Home</a><a href="about.html">About</a><a href="faqs.html">FAQs</a><a href="videos.html">Videos</a><a href="contact.html">Contact</a>

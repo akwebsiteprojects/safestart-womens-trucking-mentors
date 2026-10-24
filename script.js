@@ -47,15 +47,37 @@ if (grid && VIDEOS.length) {
   });
 }
 
-// "Copy email address" buttons
-document.querySelectorAll('[data-copy]').forEach(function (btn) {
-  btn.addEventListener('click', function () {
-    var text = btn.getAttribute('data-copy');
-    var status = btn.parentNode.querySelector('.form-status');
-    function done() { if (status) status.textContent = 'Copied: ' + text; }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, function () { if (status) status.textContent = text; });
-    } else { if (status) status.textContent = text; }
+// Contact form (one on every page). Sending opens the visitor's email app
+// with a message to the address in the form's data-email attribute,
+// already filled in with everything they typed.
+document.querySelectorAll('[data-contact-form]').forEach(function (form) {
+  var status = form.querySelector('.form-status');
+  var to = form.getAttribute('data-email');
+  function say(msg, isError) { status.textContent = msg; status.classList.toggle('error', !!isError); }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = form.elements, ok = true;
+    ['name', 'email', 'message'].forEach(function (n) {
+      var bad = !f[n].value.trim() || (n === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f[n].value.trim()));
+      f[n].classList.toggle('invalid', bad);
+      f[n].setAttribute('aria-invalid', bad);
+      if (bad && ok) { f[n].focus(); ok = false; }
+    });
+    if (!ok) { say('Please add your name, a valid email and a message.', true); return; }
+
+    var name = f.name.value.trim();
+    var body = 'Name: ' + name +
+      '\nEmail: ' + f.email.value.trim() +
+      '\nPhone: ' + (f.phone.value.trim() || 'Not given') +
+      '\nInterested in: ' + f.interest.value +
+      '\nSent from: ' + f.page.value + ' page' +
+      '\n\n' + f.message.value.trim();
+    window.location.href = 'mailto:' + to +
+      '?subject=' + encodeURIComponent('SafeStart enquiry from ' + name) +
+      '&body=' + encodeURIComponent(body);
+    say('Your email app should now open with your message ready. Press send there to finish. ' +
+        'If nothing opened, email us at ' + to + '.');
   });
 });
 
